@@ -33,14 +33,19 @@
 // Related Topics Math Geometry 👍 640 👎 937
 
 
+/**
+ * The basic premise is that the overlap of the two rectangles if it exists is always another rectangle with
+ * co-ordinates x1 = max(x1s) x2 = min(x2s)
+ *              y1 = max(y1s) y2 = min(y2s)
+ */
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-    public static int computeAreaOfOne(int x1, int y1, int x2, int y2) {
+    private static int computeAreaOfOne(int x1, int y1, int x2, int y2) {
         return (x2 - x1) * (y2 - y1);
     }
 
-    public static int computeIntersection(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+    private static int computeIntersection(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
         int maxX1s = Math.max(ax1, bx1);
         int minX2s = Math.min(ax2, bx2);
         // no overlap
@@ -54,7 +59,7 @@ class Solution {
         if (minY2s < maxY1s) {
             return 0;
         }
-        return (minX2s - maxX1s) * (minY2s - maxY1s);
+        return computeAreaOfOne(maxX1s, maxY1s, minX2s, minY2s);
     }
 
     public int computeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
